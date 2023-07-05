@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+-->
+<schema xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:framework:Setup/Declaration/Schema/etc/schema.xsd">
+    <table name="customer_directory" resource="default" engine="innodb">
+        <column xsi:type="int" name="id" padding="10" unsigned="true" nullable="false" identity="true" comment="Id Row"/>
+        <column xsi:type="varchar" name="customer_directory" nullable="false" length="15" comment="Customer Directory"/>
+        <column xsi:type="varchar" name="fe_description" nullable="true" length="15" comment="FE Description"/>
+        <column xsi:type="boolean" name="consumer" comment="Consumer (FE)" nullable="false" default="1"/>
+        <column xsi:type="boolean" name="business" comment="Business (BE)" nullable="false" default="0"/>
+        <column xsi:type="varchar" name="be_description" nullable="true" length="15" comment="BE Description"/>
+        <constraint xsi:type="primary" referenceId="PRIMARY">
+            <column name="id"/>
+        </constraint>
+    </table>
+</schema>

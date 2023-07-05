@@ -1,0 +1,7 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:Cache/etc/cache.xsd">
+    <type name="customer_directory" translate="label,description" instance="TrainingBackend\ArchitectureAndCustomization\Model\Cache\Type\CacheType">
+        <label>Cache Type Label</label>
+        <description>Cache Type Description</description>
+    </type>
+</config>

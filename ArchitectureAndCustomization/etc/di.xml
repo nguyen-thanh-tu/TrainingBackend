@@ -1,0 +1,40 @@
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+
+<!--    Configuration XML Files-->
+    <type name="TrainingBackend\ArchitectureAndCustomization\Model\Config\Reader">
+        <arguments>
+            <argument name="fileName" xsi:type="string">customer_rules.xml</argument>
+            <argument name="converter" xsi:type="object">TrainingBackend\ArchitectureAndCustomization\Model\Config\Reader\XmlReader\Converter</argument>
+            <argument name="schemaLocator" xsi:type="object">TrainingBackend\ArchitectureAndCustomization\Model\Config\Reader\XmlReader\SchemaLocator</argument>
+            <argument name="defaultScope" xsi:type="string">frontend</argument>
+        </arguments>
+    </type>
+
+<!--    Dependencies Injection-->
+    <virtualType name="TrainingBackend\ArchitectureAndCustomization\Model\VirtualDebug" type="Magento\Framework\Logger\Handler\Base">
+        <arguments>
+            <argument name="fileName" xsi:type="string">/var/log/request.log</argument>
+        </arguments>
+    </virtualType>
+    <virtualType name="TrainingBackend\ArchitectureAndCustomization\Model\VirtualLogger" type="Magento\Framework\Logger\Monolog">
+        <arguments>
+            <argument name="handlers" xsi:type="array">
+                <item name="debug" xsi:type="object">TrainingBackend\ArchitectureAndCustomization\Model\VirtualDebug</item>
+            </argument>
+        </arguments>
+    </virtualType>
+    <type name="TrainingBackend\ArchitectureAndCustomization\Block\Widget\Rules">
+        <arguments>
+            <argument name="logger" xsi:type="object">TrainingBackend\ArchitectureAndCustomization\Model\VirtualLogger</argument>
+        </arguments>
+    </type>
+
+<!--    custom command-->
+    <type name="Magento\Framework\Console\CommandList">
+        <arguments>
+            <argument name="commands" xsi:type="array">
+                <item name="exampleSayHello" xsi:type="object">TrainingBackend\ArchitectureAndCustomization\Console\ClearOrderStatus</item>
+            </argument>
+        </arguments>
+    </type>
+</config>

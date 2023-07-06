@@ -1,0 +1,17 @@
+<?xml version="1.0" ?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:Di/etc/config.xsd">
+    <type name="Magento\Catalog\Model\Layer\Filter\Item">
+        <plugin name="custom_price_filter_plugin" type="TrainingBackend\RequestFlowProcessing\Plugin\CustomPriceFilterPlugin" sortOrder="1" />
+    </type>
+    <type name="Magento\Framework\App\RouterList">
+        <arguments>
+            <argument name="routerList" xsi:type="array">
+                <item name="securitytxt" xsi:type="array">
+                    <item name="class" xsi:type="string">TrainingBackend\RequestFlowProcessing\Controller\Router</item>
+                    <item name="disable" xsi:type="boolean">false</item>
+                    <item name="sortOrder" xsi:type="string">30</item>
+                </item>
+            </argument>
+        </arguments>
+    </type>
+</config>

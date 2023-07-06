@@ -14,4 +14,8 @@
             </argument>
         </arguments>
     </type>
+    <type name="Magento\Catalog\Helper\Product\View">
+        <plugin name="add_custom_layout_handle_to_product_page"
+                type="TrainingBackend\RequestFlowProcessing\Plugin\Catalog\Product\AddCustomLayoutHandleToProductPlugin"/>
+    </type>
 </config>

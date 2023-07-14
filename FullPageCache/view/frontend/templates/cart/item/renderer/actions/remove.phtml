@@ -1,0 +1,19 @@
+<?php
+/**
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+
+/** @var $block \Magento\Checkout\Block\Cart\Item\Renderer\Actions\Remove */
+$deletePostJson = $block->getDeletePostJson();
+$deletePost = json_decode($deletePostJson, true);
+$deletePost['action'] = str_replace('checkout/cart/delete', 'fpc/cart/delete', $deletePost['action']);
+?>
+<div
+   title="<?= $block->escapeHtml(__('Remove item')) ?>"
+   class="action action-delete"
+   datapost='<?= /* @noEscape */ json_encode($deletePost) ?>'>
+    <span>
+        <?= $block->escapeHtml(__('Remove item')) ?>
+    </span>
+</div>

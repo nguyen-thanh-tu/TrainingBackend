@@ -1,0 +1,25 @@
+#Custom Module
+type Query
+{
+    CustomGraphql (
+        action: String
+        fristname: String
+        lastname: String
+        address: String
+        city: String
+        age: String
+        id: Int
+        storecode: String
+    ): [CustomGraphqlOutput] @resolver(class: "TrainingBackend\\WorkingDatabases\\Model\\Resolver\\CustomerTrainingGraphql") @doc(description:"Custom Module Datapassing")
+}
+type CustomGraphqlOutput
+{
+    id: Int
+    success: String
+    mess: String
+    frist_name: String
+    last_name: String
+    address: String
+    city: String
+    age: String
+}

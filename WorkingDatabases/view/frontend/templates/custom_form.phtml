@@ -1,0 +1,26 @@
+<div id="custom-form">
+    <form data-bind="submit: submitForm">
+        <label for="id">Id:</label>
+        <input type="number" id="id" data-bind="value: id">
+        <label for="fristname">Fristname:</label>
+        <input type="text" id="fristname" data-bind="value: fristname">
+        <label for="lastname">Lastname:</label>
+        <input type="text" id="lastname" data-bind="value: lastname">
+        <label for="address">Address:</label>
+        <input type="text" id="address" data-bind="value: address">
+        <label for="city">City:</label>
+        <input type="text" id="city" data-bind="value: city">
+        <label for="age">Age:</label>
+        <input type="text" id="age" data-bind="value: age">
+        <button type="submit">Submit</button>
+    </form>
+    <button data-bind="click: tesst">Action</button>
+    <div id="message"></div>
+    <div id="customer-training"></div>
+    <button id="test">Test</button>
+</div>
+<script type="text/javascript">
+    require(['jquery', 'ko', 'TrainingBackend_WorkingDatabases/js/custom-form'], function ($, ko, CustomFormViewModel) {
+        ko.applyBindings(new CustomFormViewModel(), document.getElementById('custom-form'));
+    });
+</script>

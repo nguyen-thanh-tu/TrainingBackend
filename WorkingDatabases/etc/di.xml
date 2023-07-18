@@ -1,0 +1,6 @@
+<?xml version="1.0"?>
+
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+    <preference for="TrainingBackend\WorkingDatabases\Api\CustomerTrainingApiInterface" type="TrainingBackend\WorkingDatabases\Model\Api\CustomerTrainingApi"/>
+    <preference for="TrainingBackend\WorkingDatabases\Api\Response\CustomerTrainingInterface" type="TrainingBackend\WorkingDatabases\Model\Api\Response\CustomerTraining"/>
+</config>

@@ -1,0 +1,28 @@
+<?xml version="1.0" ?>
+<routes xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Webapi:etc/webapi.xsd">
+    <route url="/V1/well_trained/customer_training/create" method="POST">
+        <service class="TrainingBackend\WorkingDatabases\Api\CustomerTrainingApiInterface" method="create"/>
+        <resources>
+            <resource ref="anonymous"/>
+        </resources>
+    </route>
+    <route url="/V1/well_trained/customer_training/get" method="GET">
+        <service class="TrainingBackend\WorkingDatabases\Api\CustomerTrainingApiInterface" method="get"/>
+        <resources>
+            <resource ref="anonymous"/>
+        </resources>
+    </route>
+    <route url="/V1/well_trained/customer_training/update" method="PUT">
+        <service class="TrainingBackend\WorkingDatabases\Api\CustomerTrainingApiInterface" method="update"/>
+        <resources>
+            <resource ref="anonymous"/>
+        </resources>
+    </route>
+    <route url="/V1/well_trained/customer_training/delete/:id" method="DELETE">
+        <service class="TrainingBackend\WorkingDatabases\Api\CustomerTrainingApiInterface" method="delete"/>
+        <resources>
+            <resource ref="anonymous"/>
+        </resources>
+    </route>
+</routes>

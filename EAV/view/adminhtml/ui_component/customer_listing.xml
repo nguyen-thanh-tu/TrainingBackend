@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+/**
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+-->
+<listing xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Ui:etc/ui_configuration.xsd">
+    <listingToolbar name="listing_top">
+        <massaction name="listing_massaction" component="Magento_Ui/js/grid/tree-massactions">
+            <action name="assign_to_group_type">
+                <settings>
+                    <type>assign_to_merchant</type>
+                    <label translate="true">Assign a Merchant</label>
+                    <actions class="TrainingBackend\EAV\Ui\Component\MassAction\Merchant\Options"/>
+                </settings>
+            </action>
+        </massaction>
+    </listingToolbar>
+</listing>

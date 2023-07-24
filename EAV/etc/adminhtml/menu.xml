@@ -1,0 +1,6 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Backend:etc/menu.xsd">
+    <menu>
+        <add id="TrainingBackend_EAV::merchant" title="Merchant" module="TrainingBackend_EAV" sortOrder="50" parent="Magento_Backend::content" action="trainingbackend_eav/merchant/index" resource="TrainingBackend_EAV::merchant"/>
+    </menu>
+</config>

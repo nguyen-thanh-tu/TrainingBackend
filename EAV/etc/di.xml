@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+    <virtualType name="MerchantDataProvider" type="Magento\Framework\View\Element\UiComponent\DataProvider\DataProvider">
+        <arguments>
+            <argument name="collection" xsi:type="object" shared="false">TrainingBackend\EAV\Model\ResourceModel\Merchant\Collection</argument>
+        </arguments>
+    </virtualType>
+    <type name="TrainingBackend\EAV\Ui\Component\MassAction\Merchant\Options">
+        <arguments>
+            <argument name="data" xsi:type="array">
+                <item name="urlPath" xsi:type="string">trainingbackend_eav/merchant/massAssignMerchant</item>
+                <item name="paramName" xsi:type="string">merchant_id</item>
+                <item name="confirm" xsi:type="array">
+                    <item name="title" xsi:type="string" translatable="true">Assign a Merchant Group</item>
+                    <item name="message" xsi:type="string" translatable="true">Are you sure to assign selected customers to this merchant?</item>
+                </item>
+            </argument>
+        </arguments>
+    </type>
+</config>

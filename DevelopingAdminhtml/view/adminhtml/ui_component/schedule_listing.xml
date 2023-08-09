@@ -1,0 +1,111 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+-->
+<listing xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Ui:etc/ui_configuration.xsd">
+    <argument name="data" xsi:type="array">
+        <item name="js_config" xsi:type="array">
+            <item name="provider" xsi:type="string">schedule_listing.schedule_listing_data_source</item>
+        </item>
+    </argument>
+    <settings>
+        <spinner>schedule_listing_columns</spinner>
+        <deps>
+            <dep>schedule_listing.schedule_listing_data_source</dep>
+        </deps>
+    </settings>
+    <dataSource name="schedule_listing_data_source" component="Magento_Ui/js/grid/provider">
+        <settings>
+            <storageConfig>
+                <param name="indexField" xsi:type="string">schedule_id</param>
+            </storageConfig>
+            <updateUrl path="mui/index/render"/>
+        </settings>
+        <dataProvider class="TrainingBackend\DevelopingAdminhtml\Model\UiComponent\DataProvider\Schedule"
+                      name="schedule_listing_data_source">
+            <settings>
+                <requestFieldName>id</requestFieldName>
+                <primaryFieldName>schedule_id</primaryFieldName>
+            </settings>
+        </dataProvider>
+    </dataSource>
+    <listingToolbar name="listing_top">
+        <filters name="listing_filters">
+        </filters>
+    </listingToolbar>
+    <columns name="schedule_listing_columns">
+        <settings>
+            <editorConfig>
+                <param name="clientConfig" xsi:type="array">
+                    <item name="saveUrl" xsi:type="url" path="deveadmin/schedule/inlineEdit"/>
+                    <item name="validateBeforeSave" xsi:type="boolean">false</item>
+                </param>
+                <param name="indexField" xsi:type="string">schedule_id</param>
+                <param name="enabled" xsi:type="boolean">true</param>
+                <param name="selectProvider" xsi:type="string">schedule_listing.schedule_listing.schedule_listing_columns.ids</param>
+            </editorConfig>
+            <childDefaults>
+                <param name="fieldAction" xsi:type="array">
+                    <item name="provider" xsi:type="string">schedule_listing.schedule_listing.schedule_listing_columns_editor</item>
+                    <item name="target" xsi:type="string">startEdit</item>
+                    <item name="params" xsi:type="array">
+                        <item name="0" xsi:type="string">${ $.$data.rowIndex }</item>
+                        <item name="1" xsi:type="boolean">true</item>
+                    </item>
+                </param>
+            </childDefaults>
+        </settings>
+        <selectionsColumn name="ids">
+            <settings>
+                <indexField>schedule_id</indexField>
+                <visible>false</visible>
+            </settings>
+        </selectionsColumn>
+        <column name="event_id">
+            <settings>
+                <filter>text</filter>
+                <visible>false</visible>
+                <label translate="true">Event Id</label>
+            </settings>
+        </column>
+        <column name="day">
+            <settings>
+                <label translate="true">Day</label>
+            </settings>
+        </column>
+        <column name="date">
+            <settings>
+                <label translate="true">Date</label>
+            </settings>
+        </column>
+        <column name="details_message">
+            <settings>
+                <label translate="true">Details Message</label>
+                <editor>
+                    <validation>
+                        <rule name="required-entry" xsi:type="boolean">true</rule>
+                    </validation>
+                    <editorType>text</editorType>
+                </editor>
+            </settings>
+        </column>
+        <column name="event_time" class="TrainingBackend\DevelopingAdminhtml\Ui\Component\Listing\Columns\Date" component="Magento_Ui/js/grid/columns/date">
+            <settings>
+                <label translate="true">Event Time</label>
+                <timezone>false</timezone>
+                <dateFormat>h:mm:ss</dateFormat>
+                <editor>
+                    <editorType>date</editorType>
+                    <validation>
+                        <rule name="required-entry" xsi:type="boolean">true</rule>
+                    </validation>
+                </editor>
+                <dataType>date</dataType>
+            </settings>
+        </column>
+    </columns>
+</listing>

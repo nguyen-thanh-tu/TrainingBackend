@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+/**
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+-->
+<listing xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Ui:etc/ui_configuration.xsd">
+    <settings>
+        <buttons>
+            <button name="events">
+                <url path="deveadmin/events/addandedit"/>
+                <class>primary</class>
+                <label translate="true">Events</label>
+            </button>
+        </buttons>
+    </settings>
+    <listingToolbar name="listing_top">
+        <massaction name="listing_massaction">
+            <action name="assign_to_event">
+                <argument name="data" xsi:type="array">
+                    <item name="config" xsi:type="array">
+                        <item name="type" xsi:type="string">assign_to_event</item>
+                        <item name="label" xsi:type="string" translate="true">Assign a Event</item>
+                        <item name="actions" xsi:type="object">TrainingBackend\DevelopingAdminhtml\Ui\Component\MassAction\Events\Options</item>
+                    </item>
+                </argument>
+            </action>
+        </massaction>
+    </listingToolbar>
+</listing>

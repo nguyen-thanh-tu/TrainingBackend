@@ -1,0 +1,51 @@
+<style>
+    .admin__data-grid-header {
+        display: none;
+    }
+</style>
+<script>
+    require(
+        [
+            'jquery' ,
+            'mageUtils',
+            'Magento_Ui/js/grid/filters/filters'
+        ], function (
+            $,
+            utils,
+            Filter
+        ) {
+            function filters(event_id) {
+                Filter.call('initialize', {
+                    "deps": [
+                        "schedule_listing.schedule_listing_data_source"
+                    ],
+                    "provider": "schedule_listing.schedule_listing_data_source",
+                    "name": "schedule_listing.schedule_listing.listing_top.listing_filters",
+                    "dataScope": "filters",
+                    "extendProvider": true,
+                    "component": "Magento_Ui/js/grid/filters/filters",
+                    "displayArea": "dataGridFilters",
+                    "storageConfig": {
+                        "namespace": "current.filters",
+                        "provider": "ns = ${ $.ns }, index = bookmarks"
+                    },
+                    "options": {
+                        "dateFormat": "M/d/yy"
+                    },
+                    "index": "listing_filters",
+                    "parentName": "schedule_listing.schedule_listing.listing_top",
+                    "parentScope": "",
+                    "componentType": "filters"
+                }).set('filters', {
+                    "placeholder": true,
+                    "event_id": event_id
+                }).apply();
+            }
+        $(document).ready(function () {
+            $('.admin__page-nav-link').click(function (event) {
+                filters($(this).attr('id').replace("page_tabs_main_section_", ""));
+                console.log($(this).attr('id').replace("page_tabs_main_section_", ""));
+            });
+        });
+    });
+</script>

@@ -1,0 +1,22 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+-->
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" layout="admin-2columns-left"
+      xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <body>
+        <referenceContainer name="content">
+            <referenceContainer name="left">
+                <block class="TrainingBackend\DevelopingAdminhtml\Block\Adminhtml\Event\Edit\Tabs" name="adminhtml.events.edit.tabs"/>
+            </referenceContainer>
+            <referenceContainer name="content">
+                <block class="TrainingBackend\DevelopingAdminhtml\Block\Adminhtml\Event\Edit\EventForm" name="adminhtml.events.edit"/>
+                <uiComponent name="schedule_listing"/>
+            </referenceContainer>
+            <block class="Magento\Backend\Block\Template" name="display_info" template="TrainingBackend_DevelopingAdminhtml::display_info.phtml" />
+        </referenceContainer>
+    </body>
+</page>

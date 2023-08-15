@@ -1,0 +1,87 @@
+<?php
+/**
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+/** @var \Magento\Catalog\Block\Product\View $block */
+$product = $block->getProduct();
+$productAttrs = $product->getTypeInstance()
+    ->getConfigurableAttributes($product);
+$lastProductAttr = $productAttrs
+    ->getLastItem()
+    ->getData('product_attribute');
+$children = $product->getTypeInstance()->getUsedProducts($product);
+$attrIds = [];
+foreach ($productAttrs as $productAttr) {
+    if ($productAttr->getData('attribute_id') != $lastProductAttr->getData('attribute_id')) {
+        $attrIds['attribute_id'][] = $productAttr->getData('attribute_id');
+        $attrIds['attribute_code'][] = $productAttr->getData('product_attribute')->getData('attribute_code');
+    }
+}
+foreach ($children as $child) :
+    $proco = [];
+    foreach ($attrIds['attribute_code'] as $attrCode):
+        $proco[] = $child->getData($attrCode);
+        $attrs = implode('-', $attrIds['attribute_id']) . '-' . implode('-', $proco);
+    endforeach; ?>
+    <div class="product-options-bottom <?= $attrs ?>">
+        <input type="radio" class="select_product_options"
+               name="super_attribute[<?= $lastProductAttr->getData('attribute_id') ?>]"
+               id="select_product-options-<?= $child->getId(); ?>"
+               value="<?= $child->getData($lastProductAttr->getData('attribute_code')); ?>" >
+        <label class="product-options"
+               for="select_product-options-<?= $child->getId(); ?>"
+               title="<?= $child->getName(); ?>"><?= $child->getName(); ?></label>
+        <?= $block->getChildHtml('', true) ?>
+    </div>
+<?php endforeach; ?>
+<style>
+    .configurable:last-of-type, .product-options-bottom {
+        display: none;
+    }
+</style>
+<script>
+    require([
+        'jquery',
+    ], function ($) {
+        'use strict';
+
+        $(document).ready(function () {
+            $('.super-attribute-select:not(:last)').change(function () {
+                $('.product-options-bottom').hide();
+                var selectedValues = [];
+                var selectedNames = [];
+
+                $('.super-attribute-select:not(:last)').each(function () {
+                    var attributeName = $(this).attr('name');
+                    var attributeId = attributeName.match(/\d+/)[0];
+                    var selectedValue = $(this).val();
+
+                    selectedValues.push(selectedValue);
+                    selectedNames.push(attributeId);
+                });
+                var combinedNames = selectedNames.join('-');
+                var combinedValues = selectedValues.join('-');
+                var attrclass = '.' + (combinedNames + '-' + combinedValues);
+                $(attrclass).show();
+                $(attrclass + ' .select_product_options').first().prop('checked', true);
+                $(attrclass + ' .select_product_options').first().closest('.product-options-bottom').find('.box-tocart').show();
+            });
+            var radio = $('.select_product_options');
+            var boxTocart = $('.box-tocart');
+            if (radio.length && !radio.is(':checked')) {
+                boxTocart.hide();
+            }
+
+            // Thêm sự kiện nghe cho radio khi thay đổi
+            radio.change(function () {
+                if (this.checked) {
+                    boxTocart.hide();
+                    $(this).closest('.product-options-bottom').find('.box-tocart').show();
+                } else {
+                    boxTocart.hide();
+                }
+            });
+        });
+    });
+</script>

@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<listing xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:noNamespaceSchemaLocation="  urn:magento:module:Magento_Ui:etc/ui_configuration.xsd">
+    <listingToolbar name="listing_top">
+        <filters name="listing_filters">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="templates" xsi:type="array">
+                        <item name="filters" xsi:type="array">
+                            <item name="select" xsi:type="array">
+                                <item name="component" xsi:type="string">Magento_Ui/js/form/element/ui-select</item>
+                                <item name="template" xsi:type="string">ui/grid/filters/elements/ui-select</item>
+                            </item>
+                        </item>
+                    </item>
+                </item>
+            </argument>
+            <filterSelect
+                name="category_ids"
+                provider="${ $.parentName }"
+                sortOrder="100"
+                component="Magento_Catalog/js/components/new-category"
+                template="ui/grid/filters/elements/ui-select">
+                <argument name="data" xsi:type="array">
+                    <item name="config" xsi:type="array">
+                        <item name="filterOptions" xsi:type="boolean">true</item>
+                        <item name="levelsVisibility" xsi:type="number">1</item>
+                        <item name="filterPlaceholder" xsi:type="string" translate="true">Category Name</item>
+                        <item name="emptyOptionsHtml" xsi:type="string" translate="true">Start typing to find categories</item>
+                    </item>
+                </argument>
+                <settings>
+                    <options class="Magento\Catalog\Ui\Component\Product\Form\Categories\Options"/>
+                    <label translate="true">Categories</label>
+                    <dataScope>category_ids</dataScope>
+                    <listens>
+                        <link name="${ $.namespace }.${ $.namespace }:responseData">setParsed</link>
+                    </listens>
+                </settings>
+            </filterSelect>
+        </filters>
+    </listingToolbar>
+    <columns name="product_columns">
+        <column name="category_ids" class="TrainingBackend\CustomizingCatalog\Ui\Component\Listing\Column\Categories">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="label" xsi:type="string" translate="true">Categories</item>
+                    <item name="sortOrder" xsi:type="number">40</item>
+                </item>
+            </argument>
+        </column>
+    </columns>
+</listing>

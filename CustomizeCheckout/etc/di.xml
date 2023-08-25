@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+    <type name="Magento\Checkout\Model\ShippingInformationManagement">
+        <plugin name="magetrend-custom-field-save-info"
+                type="TrainingBackend\CustomizeCheckout\Plugin\ShippingInformationManagement" sortOrder="1"/>
+    </type>
+
+    <type name="Magento\Quote\Model\Quote\Address">
+        <plugin name="trainback-shipping-methods-management"
+                type="TrainingBackend\CustomizeCheckout\Plugin\Model\Quote\Address" sortOrder="1"/>
+    </type>
+
+    <type name="Magento\Quote\Model\Quote\Address\ToOrderAddress">
+        <plugin name="trainback-to-order-address"
+                type="TrainingBackend\CustomizeCheckout\Plugin\Model\Quote\Address\ToOrderAddress" sortOrder="1"/>
+    </type>
+
+    <type name="Magento\Quote\Model\Quote\Address">
+        <arguments>
+            <argument name="attributeList" xsi:type="object">TrainingBackend\CustomizeCheckout\Model\Quote\Address\CustomAttributeList</argument>
+        </arguments>
+    </type>
+</config>

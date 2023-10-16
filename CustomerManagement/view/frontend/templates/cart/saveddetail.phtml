@@ -1,0 +1,45 @@
+<?php
+/**
+ * Copyright © 2020 Magenest. All rights reserved.
+ * See COPYING.txt for license details.
+ *
+ * Magenest_LiveStreaming extension
+ * NOTICE OF LICENSE
+ *
+ * @category Magenest
+ * @package Magenest_LiveStreaming
+ */
+/** @var TrainingBackend\CustomerManagement\Block\Customer\SavedQuoteDetail $block
+ */
+?>
+<?= $block->getQuoteItemsHtml() ?>
+<div class="block-content">
+    <div class="box box-order-shipping-address">
+        <strong class="box-title"><span>Shipping Address</span></strong>
+        <?= $block->getBillingAddressHtml() ?>
+    </div>
+    <div class="box box-order-shipping-method">
+        <strong class="box-title">
+            <span>Shipping Method</span>
+        </strong>
+        <div class="box-content">
+            Flat Rate - Fixed
+        </div>
+    </div>
+    <div class="box box-order-billing-address">
+        <strong class="box-title">
+            <span>Billing Address</span>
+        </strong>
+        <?= $block->getShippingAddressHtml() ?>
+    </div>
+    <div class="box box-order-billing-method">
+        <strong class="box-title">
+            <span>Payment Method</span>
+        </strong>
+        <div class="box-content">
+            <dl class="payment-method checkmemo">
+                <dt class="title">Check / Money order</dt>
+            </dl>
+        </div>
+    </div>
+</div>

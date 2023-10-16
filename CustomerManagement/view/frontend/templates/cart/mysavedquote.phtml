@@ -1,0 +1,73 @@
+<?php
+/**
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+
+use Magento\Downloadable\Model\Link\Purchased\Item;
+
+/**
+ * @var $block \Magento\Downloadable\Block\Customer\Products\ListProducts
+ * @var \Magento\Framework\View\Helper\SecureHtmlRenderer $secureRenderer
+ */
+?>
+<?php $_items = $block->getItems(); ?>
+<?php if (count($_items)): ?>
+    <div class="table-wrapper downloadable-products">
+        <table id="my-downloadable-products-table" class="data table table-downloadable-products">
+            <caption class="table-caption"><?= $block->escapeHtml(__('Saved Quote')) ?></caption>
+            <thead>
+            <tr>
+                <th scope="col" class="col id"><?= $block->escapeHtml(__('Quote #')) ?></th>
+                <th scope="col" class="col id"><?= $block->escapeHtml(__('Action')) ?></th>
+            </tr>
+            </thead>
+            <tbody>
+            <?php foreach ($_items as $_item): ?>
+                <tr>
+                    <td data-th="<?= $block->escapeHtmlAttr(__('Quote #')) ?>" class="col id">
+                        <span>
+                            <?= $_item->getEntityId() ?>
+                        </span>
+                    </td>
+                    <td data-th="<?= $block->escapeHtmlAttr(__('Action')) ?>" class="col id">
+                        <a href="<?= $block->escapeUrl($block->getUrl('customermanagement/index/detail', ['id' => $_item->getEntityId()]))?>"
+                           title="<?= $block->escapeHtml(__('Detail')) ?>">
+                            Detail
+                        </a> |
+                        <a href="<?= $block->escapeUrl($block->getUrl('customermanagement/index/restorequote', ['id' => $_item->getEntityId()]))?>"
+                           title="<?= $block->escapeHtml(__('Restore')) ?>">
+                            Restore
+                        </a> |
+                        <a href="<?= $block->escapeUrl($block->getUrl('customermanagement/index/deletequote', ['id' => $_item->getEntityId()]))?>"
+                           title="<?= $block->escapeHtml(__('Delete Quote')) ?>">
+                            Delete Quote
+                        </a> |
+                        <a href="<?= $block->escapeUrl($block->getUrl('customermanagement/index/sendemail', ['id' => $_item->getEntityId()]))?>"
+                           title="<?= $block->escapeHtml(__('Send Email')) ?>">
+                            Send Email
+                        </a>
+                    </td>
+                </tr>
+            <?php endforeach; ?>
+            </tbody>
+        </table>
+    </div>
+    <?php if ($block->getChildHtml('pager')): ?>
+        <div class="toolbar downloadable-products-toolbar bottom">
+            <?= $block->getChildHtml('pager') ?>
+        </div>
+    <?php endif; ?>
+<?php else: ?>
+    <div class="message info empty">
+        <span><?= $block->escapeHtml(__('You have not purchased any saved quote yet.')) ?></span>
+    </div>
+<?php endif; ?>
+
+<div class="actions-toolbar">
+    <div class="secondary">
+        <a href="<?= $block->escapeUrl($block->getBackUrl()) ?>" class="action back">
+            <span><?= $block->escapeHtml(__('Back')) ?></span>
+        </a>
+    </div>
+</div>

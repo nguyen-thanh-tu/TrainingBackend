@@ -1,0 +1,18 @@
+<?php
+/**
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+
+/**
+ * @var \TrainingBackend\CustomerManagement\Block\Customer\RecentlyView $block
+ * @var \Magento\Framework\Escaper $escaper
+ */
+$collection = $block->getProductCollection();
+$r = $collection->getSelect()->__toString();
+foreach ($collection as $_product) :
+?>
+<li class="link authorization-link">
+    <a href="<?= /* @noEscape */ $_product->getProductUrl() ?>"><?= $escaper->escapeHtml($_product->getName()) ?></a>
+</li>
+<?php endforeach;; ?>

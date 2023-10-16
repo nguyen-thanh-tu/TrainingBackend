@@ -1,0 +1,21 @@
+<?xml version="1.0" ?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Config:etc/system_file.xsd">
+    <system>
+        <tab id="training_backend" translate="label" sortOrder="100">
+            <label>Training Backend</label>
+        </tab>
+        <section id="sales_operations" translate="label" sortOrder="130" showInDefault="1" showInWebsite="1" showInStore="1">
+            <label>Sales Operations</label>
+            <tab>training_backend</tab>
+            <resource>TrainingBackend_SalesOperations::config</resource>
+            <group id="member_rank" translate="label" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>Member Ranks</label>
+                <field id="member_rank" translate="label" sortOrder="5" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Member Ranks</label>
+                    <frontend_model>TrainingBackend\SalesOperations\Block\Adminhtml\Form\Field\MemberRanks</frontend_model>
+                    <backend_model>Magento\Config\Model\Config\Backend\Serialized\ArraySerialized</backend_model>
+                </field>
+            </group>
+        </section>
+    </system>
+</config>

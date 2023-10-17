@@ -2,5 +2,9 @@
 <schema xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"      xsi:noNamespaceSchemaLocation="urn:magento:framework:Setup/Declaration/Schema/etc/schema.xsd">
     <table name="quote" resource="default" engine="innodb">
         <column xsi:type="boolean" name="saved_quote" comment="Saved Quote" nullable="false" default="0"/>
+        <column xsi:type="boolean" name="is_restore_saved_cart" comment="Is Restore Saved Cart" nullable="false" default="0"/>
+    </table>
+    <table name="sales_order" resource="default" engine="innodb">
+        <column xsi:type="boolean" name="is_restore_saved_cart" comment="Is Restore Saved Cart" nullable="false" default="0"/>
     </table>
 </schema>

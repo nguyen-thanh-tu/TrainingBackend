@@ -32,4 +32,14 @@ class SavedQuoteDetail extends \Magento\Framework\View\Element\Template
     {
         return $this->quote->getShippingAddressHtml($this->getRequest()->getParam('id'));
     }
+
+    public function getShippingMethod()
+    {
+        return $this->quote->getQuote($this->getRequest()->getParam('id'))->getShippingAddress()->getShippingDescription();
+    }
+
+    public function getCouponCode()
+    {
+        return $this->quote->getQuote($this->getRequest()->getParam('id'))->getCouponCode();
+    }
 }

@@ -46,6 +46,7 @@ class RestoreQuote extends \Magento\Framework\App\Action\Action
         $quote = $this->quote->create()->load($this->getRequest()->getParam('id'));
         $quote->setIsActive(true);
         $quote->setSavedQuote(true);
+        $quote->setIsRestoreSavedCart(true);
         $quote->save();
         $checkoutSession->replaceQuote($quote);
         $resultRedirect = $this->resultFactory->create(ResultFactory::TYPE_REDIRECT);

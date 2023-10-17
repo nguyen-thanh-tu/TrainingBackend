@@ -56,7 +56,14 @@ class SendEmail extends \Magento\Framework\App\Action\Action
     public function execute()
     {
         $quoteId = $this->getRequest()->getParam('id');
-        $this->emailSender->sendEmail($this->quote->getQuoteItemsHtml($quoteId),'Free Ship', $this->urlBuilder->getUrl('customermanagement/index/detail', ['id' => $quoteId]));
+        $quote = $this->quote->getQuote($quoteId);
+        $this->emailSender->sendEmail(
+            $this->quote->getQuoteItemsHtml($quoteId),
+            $quote->getCouponCode(),
+            $this->urlBuilder->getUrl('customermanagement/index/detail', ['id' => $quoteId]),
+            $quote->getCustomer()->getEmail()
+        );
+        $this->messageManager->addSuccess(__("Success! Email Saved Quote sended to your email"));
         $resultRedirect = $this->resultFactory->create(ResultFactory::TYPE_REDIRECT);
         return $resultRedirect->setPath('customermanagement/index/mysavedquote');
     }

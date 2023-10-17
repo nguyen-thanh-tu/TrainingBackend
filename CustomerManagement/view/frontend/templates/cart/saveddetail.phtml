@@ -14,6 +14,14 @@
 ?>
 <?= $block->getQuoteItemsHtml() ?>
 <div class="block-content">
+    <div class="box box-order-shipping-method">
+        <strong class="box-title">
+            <span>Coupon COde</span>
+        </strong>
+        <div class="box-content">
+            <?= $block->getCouponCode() ?>
+        </div>
+    </div>
     <div class="box box-order-shipping-address">
         <strong class="box-title"><span>Shipping Address</span></strong>
         <?= $block->getBillingAddressHtml() ?>
@@ -23,7 +31,7 @@
             <span>Shipping Method</span>
         </strong>
         <div class="box-content">
-            Flat Rate - Fixed
+            <?= $block->getShippingMethod() ?>
         </div>
     </div>
     <div class="box box-order-billing-address">
@@ -31,15 +39,5 @@
             <span>Billing Address</span>
         </strong>
         <?= $block->getShippingAddressHtml() ?>
-    </div>
-    <div class="box box-order-billing-method">
-        <strong class="box-title">
-            <span>Payment Method</span>
-        </strong>
-        <div class="box-content">
-            <dl class="payment-method checkmemo">
-                <dt class="title">Check / Money order</dt>
-            </dl>
-        </div>
     </div>
 </div>

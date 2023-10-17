@@ -47,13 +47,13 @@ class Email extends \Magento\Framework\App\Helper\AbstractHelper
         $this->transportBuilder = $transportBuilder;
         $this->logger = $context->getLogger();
     }
-    public function sendEmail($itemsHtml, $code, $url)
+    public function sendEmail($itemsHtml, $code, $url, $toEmail)
     {
         try {
             $this->inlineTranslation->suspend();
             $sender = [
-                'name' => 'Test',
-                'email' => 'tunt2@magenest.com',
+                'email' => $this->scopeConfig->getValue('trans_email/ident_general/email'),
+                'name' => $this->scopeConfig->getValue('trans_email/ident_general/name'),
             ];
             $transport = $this->transportBuilder
                 ->setTemplateIdentifier('email_demo_template')
@@ -69,7 +69,7 @@ class Email extends \Magento\Framework\App\Helper\AbstractHelper
                     'url' => $url
                 ])
                 ->setFrom($sender)
-                ->addTo('tunt2@magenest.com')
+                ->addTo($toEmail)
                 ->getTransport();
             $transport->sendMessage();
             $this->inlineTranslation->resume();

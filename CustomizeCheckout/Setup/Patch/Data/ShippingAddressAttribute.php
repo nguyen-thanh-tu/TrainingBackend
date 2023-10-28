@@ -26,10 +26,17 @@ class ShippingAddressAttribute implements DataPatchInterface
      * @var EavSetupFactory
      */
     private $eavSetupFactory;
+    /**
+     * EavSetupFactory
+     *
+     * @var EavSetupFactory
+     */
+    private $customerSetupFactory;
 
     /**
      * @param ModuleDataSetupInterface $moduleDataSetup
      * @param EavSetupFactory $eavSetupFactory
+     * @param CustomerSetupFactory $customerSetupFactory
      */
     public function __construct(
         ModuleDataSetupInterface $moduleDataSetup,

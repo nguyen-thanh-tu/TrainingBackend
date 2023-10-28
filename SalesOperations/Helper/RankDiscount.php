@@ -32,7 +32,7 @@ class RankDiscount
     public function getRankDiscount($customerId, $totalAmount)
     {
         $customer = $this->customer->create()->load($customerId);
-        $config = $this->jsonSerializer->unserialize($this->scopeConfig->getValue('sales_operations/member_rank/member_rank'));
+        $config = $this->jsonSerializer->unserialize($this->scopeConfig->getValue('sales_operations/member_rank/member_rank')??'{}');
         $min = $max = '0';
         foreach ($config as $rank) {
             $max = $rank['rank_threshold'];

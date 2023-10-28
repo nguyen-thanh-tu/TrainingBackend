@@ -106,7 +106,7 @@ class Options implements \JsonSerializable
                 );
             }
 
-            $this->options = array_values($this->options);
+            $this->options = array_values($this->options??[]);
         }
 
         return $this->options;

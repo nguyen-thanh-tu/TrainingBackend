@@ -2,25 +2,25 @@
 
 namespace TrainingBackend\SalesOperations\Observer\Checkout;
 
-use Magenest\LiveStreaming\Api\StreamManagementInterface;
-use Magenest\LiveStreaming\Observer\Report\AbstractReportObserver;
 use Magento\Framework\Event\Observer;
+use Magento\Framework\Event\ObserverInterface;
 
-class PlusRankPoint extends AbstractReportObserver
+class PlusRankPoint implements ObserverInterface
 {
+    /**
+     * @var \Magento\Customer\Model\CustomerFactory
+     */
     protected $customer;
 
+    /**
+     * @param \Magento\Customer\Model\CustomerFactory $customer
+     */
     public function __construct
     (
-        \Magenest\LiveStreaming\Observer\EventSaver $eventSaver,
-        \Magenest\LiveStreaming\Helper\ReportHelper $reportHelper,
-        \Magenest\LiveStreaming\Api\StreamReportManagementInterface $streamReportManagement,
-        StreamManagementInterface $streamManagementInterface,
         \Magento\Customer\Model\CustomerFactory $customer,
     )
     {
         $this->customer = $customer;
-        parent::__construct($eventSaver, $reportHelper, $streamReportManagement, $streamManagementInterface);
     }
 
     public function execute(Observer $observer)

@@ -2,4 +2,20 @@
     <type name="Magento\Sales\Model\Service\InvoiceService">
         <plugin name="yourmodule_invoice_plugin" type="TrainingBackend\SalesOperations\Plugin\InvoiceServicePlugin" />
     </type>
+    <virtualType name="TrainingBackend\SalesOperations\Plugin\Button\ToolbarPlugin\DataProvider"
+                 type="TrainingBackend\SalesOperations\Ui\Customer\Component\Button\DataProvider">
+        <arguments>
+            <argument name="data" xsi:type="array">
+                <item name="label" xsi:type="string" translatable="true">Confirm Order</item>
+            </argument>
+        </arguments>
+    </virtualType>
+    <type name="Magento\Backend\Block\Widget\Button\ToolbarInterface">
+        <plugin name="confỉm_order_button" type="TrainingBackend\SalesOperations\Plugin\Button\ToolbarPlugin"/>
+    </type>
+    <type name="TrainingBackend\SalesOperations\Plugin\Button\ToolbarPlugin">
+        <arguments>
+            <argument name="dataProvider" xsi:type="object">TrainingBackend\SalesOperations\Plugin\Button\ToolbarPlugin\DataProvider</argument>
+        </arguments>
+    </type>
 </config>

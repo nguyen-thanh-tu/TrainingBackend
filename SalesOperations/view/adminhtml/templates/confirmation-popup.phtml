@@ -1,0 +1,61 @@
+<?php
+/**
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+/** @var \TrainingBackend\SalesOperations\Block\Adminhtml\ConfirmationPopup $block */
+?>
+<div id="popup-modal-main-confirm-order" style="display:none;">
+    <form action="<?= $block->escapeUrl($block->getFormUrl())?>" method="post"
+          id="confirm-order-view-add-warranty-form">
+        <div class="admin__field _required">
+            <div class="admin__field-label" style="display: inline-block;">
+                <label for="HSCEBK6">
+                    <span>Sale Agent</span>
+                </label>
+            </div>
+            <div class="admin__field-control">
+                <select class="admin__control-select" name="customer[website_id]" id="HSCEBK6">
+                    <option data-title="Main Website" value="1">Main Website</option>
+                </select>
+            </div>
+        </div>
+        <div class="admin__field _required">
+            <div class="admin__field-label" style="display: inline-block;">
+                <label for="HSCEBK61">
+                    <span>Order Source</span>
+                </label>
+            </div>
+            <div class="admin__field-control">
+                <select class="admin__control-select" name="customer[website_id]" id="HSCEBK61">
+                    <option data-title="Main Website" value="1">Main Website</option>
+                </select>
+            </div>
+        </div>
+    </form>
+</div>
+<style>#order_invoice, #order_ship {display: none;}</style>
+<script>
+    require([
+        'jquery',
+        'Magento_Ui/js/modal/modal'
+    ], function ($, modal) {
+        $('#confỉm_order_button').click(function () {
+            var options = {
+                type: 'popup',
+                responsive: true,
+                innerScroll: true,
+                title: $.mage.__('Comfirm Order'),
+                buttons: [{
+                    text: $.mage.__('Comfirm Order'),
+                    'class': 'action-primary',
+                    /** @inheritdoc */
+                    click: function () {
+                        $('#confirm-order-view-add-warranty-form').submit();
+                    }
+                }]
+            };
+            $("#popup-modal-main-confirm-order").modal(options).modal('openModal');
+        });
+    })
+</script>

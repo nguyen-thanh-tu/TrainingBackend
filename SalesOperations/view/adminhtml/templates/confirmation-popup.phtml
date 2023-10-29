@@ -5,6 +5,7 @@
  */
 /** @var \TrainingBackend\SalesOperations\Block\Adminhtml\ConfirmationPopup $block */
 ?>
+<?php if($block->getOrder()->getStatus() === 'pending'): ?>
 <div id="popup-modal-main-confirm-order" style="display:none;">
     <form action="<?= $block->escapeUrl($block->getFormUrl())?>" method="post"
           id="confirm-order-view-add-warranty-form">
@@ -16,7 +17,9 @@
             </div>
             <div class="admin__field-control">
                 <select class="admin__control-select" name="customer[website_id]" id="HSCEBK6">
-                    <option data-title="Main Website" value="1">Main Website</option>
+                    <?php foreach ($block->getAdminUsers() as $adminUser): ?>
+                    <option data-title="<?= $adminUser['label'] ?>" value="<?= $adminUser['value'] ?>"><?= $adminUser['label'] ?></option>
+                    <?php endforeach; ?>
                 </select>
             </div>
         </div>
@@ -34,12 +37,57 @@
         </div>
     </form>
 </div>
-<style>#order_invoice, #order_ship {display: none;}</style>
+<?php endif; ?>
+<div id="popup-modal-main-cancel-order" style="display:none;">
+    <form action="<?= $block->escapeUrl($block->getFormUrl())?>" method="post"
+          id="confirm-order-view-add-warranty-form">
+        <div class="admin__field _required">
+            <div class="admin__field-label" style="display: inline-block;">
+                <label for="HSCEBK6">
+                    <span>Sale Agent</span>
+                </label>
+            </div>
+            <div class="admin__field-control">
+                <select class="admin__control-select" name="customer[website_id]" id="HSCEBK6">
+                    <?php foreach ($block->getAdminUsers() as $adminUser): ?>
+                        <option data-title="<?= $adminUser['label'] ?>" value="<?= $adminUser['value'] ?>"><?= $adminUser['label'] ?></option>
+                    <?php endforeach; ?>
+                </select>
+            </div>
+        </div>
+        <div class="admin__field _required">
+            <div class="admin__field-label" style="display: inline-block;">
+                <label for="HSCEBK61">
+                    <span>Order Source</span>
+                </label>
+            </div>
+            <div class="admin__field-control">
+                <select class="admin__control-select" name="customer[website_id]" id="HSCEBK61">
+                    <option data-title="Main Website" value="1">Main Website</option>
+                </select>
+            </div>
+        </div>
+    </form>
+</div>
+<style>
+    <?php if($block->getOrder()->getStatus() === 'pending'): ?>
+    #order_invoice, #order_ship {display: none;}
+    <?php endif; ?>
+    #order-view-cancel-button {
+        order: 1;
+        background-color: #35302c;
+        border-color: #35302c;
+        color: #fff;
+        text-decoration: none;
+    }
+</style>
 <script>
     require([
         'jquery',
         'Magento_Ui/js/modal/modal'
     ], function ($, modal) {
+        $('#order-view-cancel-button').text('Cancel Order');
+        <?php if($block->getOrder()->getStatus() === 'pending'): ?>
         $('#confỉm_order_button').click(function () {
             var options = {
                 type: 'popup',
@@ -57,5 +105,6 @@
             };
             $("#popup-modal-main-confirm-order").modal(options).modal('openModal');
         });
+        <?php endif; ?>
     })
 </script>

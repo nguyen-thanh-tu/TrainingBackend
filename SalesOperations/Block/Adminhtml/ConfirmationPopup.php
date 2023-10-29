@@ -3,11 +3,10 @@
 namespace TrainingBackend\SalesOperations\Block\Adminhtml;
 
 use Magento\Backend\Block\Template;
-use Magento\Framework\App\ObjectManager;
 use Magento\Framework\Serialize\Serializer\Json;
-use Magento\LoginAsCustomerAdminUi\Ui\Customer\Component\ConfirmationPopup\Options;
-use Magento\LoginAsCustomerApi\Api\ConfigInterface;
 use Magento\Store\Ui\Component\Listing\Column\Store\Options as StoreOptions;
+use Magento\User\Model\ResourceModel\User\CollectionFactory as AdminUserCollection;
+use Magento\Framework\Registry;
 
 class ConfirmationPopup extends Template
 {
@@ -17,52 +16,66 @@ class ConfirmationPopup extends Template
     private $storeOptions;
 
     /**
-     * @var ConfigInterface
-     */
-    private $config;
-
-    /**
      * @var Json
      */
     private $json;
 
     /**
-     * @var Options
+     * @var AdminUserCollection
      */
-    private $options;
+    private $userCollectionFactory;
+
+    /**
+     * @var Registry
+     */
+    private $registry;
 
     /**
      * @param Template\Context $context
      * @param StoreOptions $storeOptions
      * @param ConfigInterface $config
      * @param Json $json
+     * @param AdminUserCollection $userCollectionFactory
+     * @param Registry $registry
      * @param array $data
      * @param Options|null $options
      */
     public function __construct(
         Template\Context $context,
         StoreOptions $storeOptions,
-        ConfigInterface $config,
         Json $json,
-        array $data = [],
-        ?Options $options = null
+        AdminUserCollection $userCollectionFactory,
+        Registry $registry,
+        array $data = []
     ) {
         parent::__construct($context, $data);
         $this->storeOptions = $storeOptions;
-        $this->config = $config;
         $this->json = $json;
-        $this->options = $options ?? ObjectManager::getInstance()->get(Options::class);
+        $this->userCollectionFactory = $userCollectionFactory;
+        $this->registry = $registry;
+    }
+
+    public function getAdminUsers()
+    {
+        $adminUsers = [];
+
+        foreach ($this->userCollectionFactory->create() as $user) {
+            $adminUsers[] = [
+                'value' => $user->getId(),
+                'label' => $user->getName()
+            ];
+        }
+
+        return $adminUsers;
     }
 
     /**
-     * @inheritdoc
-     * @since 100.4.0
+     * Retrieve order model object
+     *
+     * @return \Magento\Sales\Model\Order
      */
-    public function toHtml()
+    public function getOrder()
     {
-        if (!$this->config->isEnabled()) {
-            return '';
-        }
-        return parent::toHtml();
+        return $this->registry->registry('sales_order');
     }
 }

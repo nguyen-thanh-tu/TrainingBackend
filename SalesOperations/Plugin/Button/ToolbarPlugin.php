@@ -49,7 +49,7 @@ class ToolbarPlugin
         $nameInLayout = $context->getNameInLayout();
 
         $order = $this->getOrder($nameInLayout, $context);
-        if ($order && !empty($order['customer_id'])) {
+        if ($order && $order->getStatus() === 'pending' && !empty($order['customer_id'])) {
             $customerId = (int)$order['customer_id'];
             $buttonList->add(
                 'confỉm_order_button',
